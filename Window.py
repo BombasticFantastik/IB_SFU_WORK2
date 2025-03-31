@@ -52,9 +52,13 @@ class ImageViewer(QWidget):
     
 
     def on_left_button_clicked(self):
-        text=int(self.bob_input.text())
+        text=split_text(self.bob_input.text())
         #print(text2ASCII(text[0]))
-        #codded_text=[''.join(text2ASCII(txt)[0]) for txt in text]#получается лист закодированных слов 
+        codded_text=[text2ASCII(txt)[0] for txt in text]#получается лист закодированных слов 
+        steps=[text2ASCII(txt)[1] for txt in text]#получается лист шагов
+        print(codded_text)
+        print(steps)
+        
 
 
 
@@ -74,16 +78,20 @@ class ImageViewer(QWidget):
 
 
 
-        #final_acsitext=int(codded_text[0])#временно 0
-        #result=pow(final_acsitext,self.s,self.N)
+        final_acsitext=int(''.join(codded_text[0]))#временно 0
+        print(final_acsitext)
         
-        #self.alice_input.setText(str(result))
-        self.alice_input.setText(str(pow(text,self.s,self.N)))
+        
+        
+        self.alice_input.setText(str(pow(final_acsitext,self.s,self.N)))
         print("Кнопка слева нажата!")
 
     def on_right_button_clicked(self):
+        print(int(self.alice_input.text()))
         result = pow(int(self.alice_input.text()),self.e,self.N)
-        self.alice_input.setText(str(result))
+        print(result)
+        final_result=ASCII2text(str(result),3)
+        self.alice_input.setText(str(final_result))
         print("Кнопка справа!")
 
 
