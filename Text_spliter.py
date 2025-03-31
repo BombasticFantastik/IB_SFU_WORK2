@@ -12,6 +12,7 @@ def split_text(text):
 def ASCII2text(nums:int,step:int):
     text=[]
     for i in range(0,len(nums),step):
+        print(nums[i:i+step],chr(int(nums[i:i+step])))
         text.append(chr(int(nums[i:i+step])))
     return text
            

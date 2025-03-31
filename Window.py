@@ -13,6 +13,9 @@ class ImageViewer(QWidget):
         self.s=s
         self.e=e
 
+        #print(P,Q,N,d,s,e)
+        
+
         self.setWindowTitle("Интерфейс с фотографиями и кнопками")
         self.setGeometry(100, 100, 100, 100)
 
@@ -52,47 +55,51 @@ class ImageViewer(QWidget):
     
 
     def on_left_button_clicked(self):
+        
         text=split_text(self.bob_input.text())
+        
         #print(text2ASCII(text[0]))
         codded_text=[text2ASCII(txt)[0] for txt in text]#получается лист закодированных слов 
+       
         steps=[text2ASCII(txt)[1] for txt in text]#получается лист шагов
-        print(codded_text)
-        print(steps)
+
+        final_acsitext=[int(''.join(txt)) for txt in codded_text]
+
+        #-------------------------------------------
+
         
+        self.coded_text_for_alice=[txt for txt in final_acsitext]
+        print(self.coded_text_for_alice)
+        self.coded_text_for_alice=self.coded_text_for_alice[0]
+        print(self.coded_text_for_alice)
+        self.coded_text_for_alice=pow(self.coded_text_for_alice,self.s,self.N)
+        print(self.coded_text_for_alice)
 
-
-
-
-
-
-        #text_for_return=''.join(codded_text)
-        # text=[part for part in split_text(self.bob_input.text())]
-        # acsitext,self.step=[text2ASCII(part) for part in text ]
-        # merge_acsitext=[''.join(part) for part in acsitext]
-        # final_acsitext=''.join(merge_acsitext)
-
-
-
-
-
-
-
-
-        final_acsitext=int(''.join(codded_text[0]))#временно 0
-        print(final_acsitext)
         
+        #print("Кнопка слева нажата!")
         
-        
-        self.alice_input.setText(str(pow(final_acsitext,self.s,self.N)))
-        print("Кнопка слева нажата!")
+        #[101114114114114114114114114114] 7004512948217794123544388233 9548663343258338948137807531
+        #[101114114114114114114114114]    7004512948217794123544388233 9548663343258338948137807531
 
     def on_right_button_clicked(self):
-        print(int(self.alice_input.text()))
-        result = pow(int(self.alice_input.text()),self.e,self.N)
-        print(result)
-        final_result=ASCII2text(str(result),3)
-        self.alice_input.setText(str(final_result))
-        print("Кнопка справа!")
+        print('---')
+        print(self.coded_text_for_alice)
+        
+        
+
+
+        #result = [pow(txt,self.e,selrf.N) for txt in self.coded_text_for_alice ]
+        print(self.coded_text_for_alice,self.e,self.N)
+        print(pow(self.coded_text_for_alice,self.e,self.N))
+        result=[pow(self.coded_text_for_alice,self.e,self.N)]
+        print(f'result:{result},e:{self.e},N:{self.N},s:{self.s}')
+        
+        final_result=[ASCII2text(str(txt),3) for txt in result ]
+        #print(final_result)
+        self.alice_input.setText(str(final_result[0]))
+        #print("Кнопка справа!")
+
+        print('____________________')
 
 
         
