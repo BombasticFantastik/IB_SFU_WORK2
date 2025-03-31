@@ -13,85 +13,78 @@ class ImageViewer(QWidget):
         self.s=s
         self.e=e
 
-        # Настройка окна
         self.setWindowTitle("Интерфейс с фотографиями и кнопками")
         self.setGeometry(100, 100, 100, 100)
 
-        # Загрузка изображений
-        self.image_left = QPixmap("bob.jpg")  # Укажите путь к левому изображению
-        self.image_right = QPixmap("alice.jpg")  # Укажите путь к правому изображению
-
-        # Создание меток для изображений
-        self.label_left = QLabel(self)
-        self.label_left.setPixmap(self.image_left)
-        self.label_left.setScaledContents(True)
-
-        self.label_right = QLabel(self)
-        self.label_right.setPixmap(self.image_right)
-        self.label_right.setScaledContents(True)
-
-        #создание инпутов
         self.bob_input=QLineEdit()
         self.alice_input=QLineEdit()
 
-        #создание лейблов
         self.bob_your_text_label=QLabel("Введите текст Боба")
-        self.center_label=QLabel("Зашифрованное сообщение")
+        self.alice_your_text_label=QLabel("Сообщение Алисы")
+        
 
-        #создание кнопок
         self.button_left = QPushButton("Кнопка слева", self)
         self.button_right = QPushButton("Кнопка справа", self)
 
-        # Подключение кнопок к функциям
         self.button_left.clicked.connect(self.on_left_button_clicked)
         self.button_right.clicked.connect(self.on_right_button_clicked)
 
+
         # Создание layout'ов
         left_layout = QVBoxLayout()
-        #left_layout.addWidget(self.label_left)
         left_layout.addWidget(self.bob_your_text_label)
         left_layout.addWidget(self.bob_input)
         left_layout.addWidget(self.button_left)
         
 
         right_layout = QVBoxLayout()
-        #right_layout.addWidget(self.label_right)
+        right_layout.addWidget(self.alice_your_text_label)
         right_layout.addWidget(self.alice_input)
         right_layout.addWidget(self.button_right)
 
-        center_layout = QVBoxLayout()
-        center_layout.addWidget(self.center_label)
+
 
         main_layout = QHBoxLayout()
         main_layout.addLayout(left_layout)
-        main_layout.addLayout(center_layout)
         main_layout.addLayout(right_layout)
-
         self.setLayout(main_layout)
 
+    
+
     def on_left_button_clicked(self):
-        text=[part for part in split_text(self.bob_input.text())]
-        acsitext,self.step=[text2ASCII(part) for part in text ]
+        text=int(self.bob_input.text())
+        #print(text2ASCII(text[0]))
+        #codded_text=[''.join(text2ASCII(txt)[0]) for txt in text]#получается лист закодированных слов 
+
+
+
+
+
+
+        #text_for_return=''.join(codded_text)
+        # text=[part for part in split_text(self.bob_input.text())]
+        # acsitext,self.step=[text2ASCII(part) for part in text ]
+        # merge_acsitext=[''.join(part) for part in acsitext]
+        # final_acsitext=''.join(merge_acsitext)
+
+
+
+
+
+
+
+
+        #final_acsitext=int(codded_text[0])#временно 0
+        #result=pow(final_acsitext,self.s,self.N)
         
-       
-        merge_acsitext=[''.join(part) for part in acsitext]
-        
-        final_acsitext=''.join(merge_acsitext)
-        final_acsitext=int(final_acsitext)
-
-        result=pow(final_acsitext,self.s,self.N)
-
-
-        self.center_label.setText(str(result))
+        #self.alice_input.setText(str(result))
+        self.alice_input.setText(str(pow(text,self.s,self.N)))
         print("Кнопка слева нажата!")
 
     def on_right_button_clicked(self):
-        text=int(self.center_label.text())
-        result=pow(text,self.s,self.N)
-
-        text_result=ASCII2text(result,self.step)
-        
-        self.alice_input.setText(str(text_result))
+        result = pow(int(self.alice_input.text()),self.e,self.N)
+        self.alice_input.setText(str(result))
+        print("Кнопка справа!")
 
 
         
