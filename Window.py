@@ -12,8 +12,6 @@ class ImageViewer(QWidget):
         self.d=d
         self.s=s
         self.e=e
-
-        #print(P,Q,N,d,s,e)
         
 
         self.setWindowTitle("Интерфейс с фотографиями и кнопками")
@@ -52,55 +50,25 @@ class ImageViewer(QWidget):
         main_layout.addLayout(right_layout)
         self.setLayout(main_layout)
 
-    
-
     def on_left_button_clicked(self):
-        
-        text=split_text(self.bob_input.text())
-        
+
+        text=split_text(self.bob_input.text()) 
         codded_text=[text2ASCII(txt)[0] for txt in text]
-       
-        #steps=[text2ASCII(txt)[1] for txt in text]
-
+        self.steps=[text2ASCII(txt)[1] for txt in text]
         
-
         final_acsitext=[int(''.join(txt)) for txt in codded_text]
-        
-       
-        #print(final_acsitext)
-
-        #-------------------------------------------
-
-        
         self.coded_text_for_alice=[pow(txt,self.s,self.N) for txt in final_acsitext]
-
-        #print(self.coded_text_for_alice)
-        
-
 
     def on_right_button_clicked(self):
 
-        
-
-        #print(f's:{self.s},N:{self.N},e:{self.e},d:{self.d}')
-
         result=[pow(txt,self.e,self.N) for txt in self.coded_text_for_alice ]
-
-        
-
-        
-
-        
-        
-        final_result=[ASCII2text(str(txt)) for txt in result ]
-        print(final_result)
-        
-        finaliche_text=[''.join(txt) for txt in final_result]
-        
+   
+        final_result=[ASCII2text(str(result[i]),self.steps[i]) for i in range(len(result)) ]
+        finaliche_text=[''.join(txt) for txt in final_result]     
         self.alice_input.setText(''.join(finaliche_text))
         
 
-        print('____________________')
+
 
 
         
