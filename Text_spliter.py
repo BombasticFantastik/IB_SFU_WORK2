@@ -1,20 +1,22 @@
 
 def split_text(text):
     splitted_text=[]
-    for i in range(0,len(text),8):
+    for i in range(0,len(text),4):#?????????????????????????????????????
         try:
-            splitted_text.append(text[i:i+28])
+            splitted_text.append(text[i:i+4])#?????????????????????????????????
         except:
             splitted_text.append(text[i:])
             return splitted_text
     return splitted_text
         
-def ASCII2text(nums:int,step:int):
+def ASCII2text(nums:int):
     text=[]
-    for i in range(0,len(nums),step):
-        #print(nums,i,i+step)
-        #print(nums[i:i+step],chr(int(nums[i:i+step])))
-        text.append(chr(int(nums[i:i+step])))
+    for i in range(0,len(nums),6):
+        
+        text.append(chr(int(nums[3:6])))
+        nums=nums[6:]
+
+        #text.append(chr(int(nums[i+3:i+6])))
     return text
            
     
@@ -43,7 +45,7 @@ def text2ASCII(text:str)-> list:
         
         while len(num)<=5:
             
-            num='0'+num
+            num='1'+num
         new_nums.append(num)
     
     return new_nums,5

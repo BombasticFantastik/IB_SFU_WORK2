@@ -65,14 +65,16 @@ class ImageViewer(QWidget):
         
 
         final_acsitext=[int(''.join(txt)) for txt in codded_text]
-        print(final_acsitext)
-
         
+       
+        #print(final_acsitext)
 
         #-------------------------------------------
 
         
         self.coded_text_for_alice=[pow(txt,self.s,self.N) for txt in final_acsitext]
+
+        #print(self.coded_text_for_alice)
         
 
 
@@ -80,12 +82,22 @@ class ImageViewer(QWidget):
 
         
 
+        #print(f's:{self.s},N:{self.N},e:{self.e},d:{self.d}')
+
         result=[pow(txt,self.e,self.N) for txt in self.coded_text_for_alice ]
+
+        
+
+        
+
         
         
-        final_result=[ASCII2text(str(txt),6) for txt in result ]
+        final_result=[ASCII2text(str(txt)) for txt in result ]
+        print(final_result)
         
-        self.alice_input.setText(str(final_result[0]))
+        finaliche_text=[''.join(txt) for txt in final_result]
+        
+        self.alice_input.setText(''.join(finaliche_text))
         
 
         print('____________________')
