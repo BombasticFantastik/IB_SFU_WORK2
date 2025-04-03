@@ -58,46 +58,35 @@ class ImageViewer(QWidget):
         
         text=split_text(self.bob_input.text())
         
-        #print(text2ASCII(text[0]))
-        codded_text=[text2ASCII(txt)[0] for txt in text]#получается лист закодированных слов 
+        codded_text=[text2ASCII(txt)[0] for txt in text]
        
-        steps=[text2ASCII(txt)[1] for txt in text]#получается лист шагов
+        #steps=[text2ASCII(txt)[1] for txt in text]
+
+        
 
         final_acsitext=[int(''.join(txt)) for txt in codded_text]
+        print(final_acsitext)
+
+        
 
         #-------------------------------------------
 
         
-        self.coded_text_for_alice=[txt for txt in final_acsitext]
-        print(self.coded_text_for_alice)
-        self.coded_text_for_alice=self.coded_text_for_alice[0]
-        print(self.coded_text_for_alice)
-        self.coded_text_for_alice=pow(self.coded_text_for_alice,self.s,self.N)
-        print(self.coded_text_for_alice)
+        self.coded_text_for_alice=[pow(txt,self.s,self.N) for txt in final_acsitext]
+        
 
-        
-        #print("Кнопка слева нажата!")
-        
-        #[101114114114114114114114114114] 7004512948217794123544388233 9548663343258338948137807531
-        #[101114114114114114114114114]    7004512948217794123544388233 9548663343258338948137807531
 
     def on_right_button_clicked(self):
-        print('---')
-        print(self.coded_text_for_alice)
-        
+
         
 
-
-        #result = [pow(txt,self.e,selrf.N) for txt in self.coded_text_for_alice ]
-        print(self.coded_text_for_alice,self.e,self.N)
-        print(pow(self.coded_text_for_alice,self.e,self.N))
-        result=[pow(self.coded_text_for_alice,self.e,self.N)]
-        print(f'result:{result},e:{self.e},N:{self.N},s:{self.s}')
+        result=[pow(txt,self.e,self.N) for txt in self.coded_text_for_alice ]
         
-        final_result=[ASCII2text(str(txt),3) for txt in result ]
-        #print(final_result)
+        
+        final_result=[ASCII2text(str(txt),6) for txt in result ]
+        
         self.alice_input.setText(str(final_result[0]))
-        #print("Кнопка справа!")
+        
 
         print('____________________')
 
