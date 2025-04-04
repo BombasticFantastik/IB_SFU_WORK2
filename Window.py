@@ -24,8 +24,8 @@ class ImageViewer(QWidget):
         self.alice_your_text_label=QLabel("Сообщение Алисы")
         
 
-        self.button_left = QPushButton("Кнопка слева", self)
-        self.button_right = QPushButton("Кнопка справа", self)
+        self.button_left = QPushButton("Отправить сообщение Алисе", self)
+        self.button_right = QPushButton("Перевести сообщение Боба", self)
 
         self.button_left.clicked.connect(self.on_left_button_clicked)
         self.button_right.clicked.connect(self.on_right_button_clicked)
@@ -55,6 +55,7 @@ class ImageViewer(QWidget):
         text=split_text(self.bob_input.text()) 
         codded_text=[text2ASCII(txt)[0] for txt in text]
         self.steps=[text2ASCII(txt)[1] for txt in text]
+        
         
         final_acsitext=[int(''.join(txt)) for txt in codded_text]
         self.coded_text_for_alice=[pow(txt,self.s,self.N) for txt in final_acsitext]

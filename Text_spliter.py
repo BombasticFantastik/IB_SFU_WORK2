@@ -9,23 +9,46 @@ def split_text(text):
             return splitted_text
     return splitted_text
         
-def ASCII2text(nums:int,step:int):
-    text=[]
-    for i in range(0,len(nums),step+1):
-
-        word=int(nums[i:i+step+1])
-        bigger=len(str(word))-(step)
-        print(word)
+# def ASCII2text(nums:int,step:int):
+#     text=[]
+#     print(nums)
+#     for i in range(0,len(nums),step+1):
         
-        word=int(str(word)[bigger:])
-        while (200>word>80)==False and (1095>word>1001)==False and (2000>word>1200)==False:
 
-            word=int(str(word)[1:])
-        #print(word)
-       # [11092]
+#         word=int(nums[i:i+step+1])
+#         bigger=len(str(word))-(step)
+        
+        
+#         word=int(str(word)[bigger:])
+#         while (200>word>10)==False and (9000>word>8900)==False:
+#             print(word)
+#             word=int(str(word)[1:])
+ 
 
 
-        text.append(chr(word))
+#         text.append(chr(word))
+#     return text
+
+
+
+def ASCII2text(nums:int,steps:int):
+    text=[]
+    print(nums)
+    for step in (steps):
+        
+        word=nums[:max(steps)+1]
+        
+        ln=max(steps)+1-step
+        
+        word=word[ln:]
+        print(nums)
+
+        
+
+
+        nums=nums[max(steps)+1:]
+
+        text.append(chr(int(word)))
     return text
            
     
@@ -45,4 +68,4 @@ def text2ASCII(text:str)-> list:
             num='9'+num#была 1
         new_nums.append(num)
     
-    return new_nums,max(lenghts)
+    return new_nums,lenghts
